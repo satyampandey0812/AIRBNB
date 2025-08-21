@@ -1,0 +1,109 @@
+body{ 
+display: flex;
+flex-direction: column;
+min-height: 100vh;
+};
+ 
+.container{
+    flex: 1;
+}
+/* navbar*/
+.navbar{
+    background-color: white !important;
+    height: 5rem;
+}
+.fa-compass{
+    color: #fe424d;
+    font-size: 2rem;
+}
+.nav-link{
+    
+    color: #222222  !important;
+}
+/* footer */
+.f-info{
+    background-color: #ebebeb;
+   text-align: center;
+   height: 8rem;
+   justify-content: center;
+   align-items: space-evenly;
+}
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
+}
+.f-info-links{
+    width: 100%;
+    
+}
+.social-media{
+    width: 100%;
+    font-size: 1.2rem;
+    margin-right: 20rem;
+}
+.f-info-links a:hover {
+    text-decoration: underline;
+    
+}
+/* index styling */
+.card{
+    
+    border: none !important;
+    margin-bottom: 2rem;
+
+}
+.card-img-top{
+   
+    width: 100%;
+       border-radius: 1rem  !important;
+       object-fit: cover  !important;
+}
+.card-img-top-overelay:hover{
+    opacity: 0.1 !important;
+}
+.card-body{
+    padding: 0 !important;
+   
+}
+.card-text p{
+    font-weight: 400;
+    
+}
+.listing-link{
+
+     text-decoration: none !important;
+}
+.listing-link:hover{
+    opacity: 0.8;
+}
+/* new route page styling */
+#add-btn{
+    background-color:#fe424d;
+border: none !important;
+border-radius: 0.2rem;
+}
+/* edit route page styling */
+#edit-btn{
+    background-color:#fe424d;
+border: none !important;
+border-radius: 0.2rem;
+}
+/* show route page styling */
+.show-img{
+    height: 30vh;
+}
+#edit{
+    background-color:#fe424d;
+border: none !important;
+border-radius: 0.2rem;
+}
+#delete-btn{
+    background-color:#fe424d;
+border: none !important;
+border-radius: 0.2rem;
+}
+/* .show-card{
+padding-bottom: 0  !important;
+padding-left: 0  !important;
+padding-right: 0 ;
+} */

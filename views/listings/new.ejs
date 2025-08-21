@@ -1,0 +1,84 @@
+<% layout("/layout/boilerplate.ejs") %>
+    <div class="row">
+        <div class="col-8 offset-2">
+
+          
+                <h3>Create New Route</h3>
+                <form method="post" action="/listings"   class="needs-validation"  novalidate> 
+
+
+                    <div>
+                        <label for="title" class="form-label">Title</label>
+                        <input name="title" placeholder="enter the title" type="text" required
+                            class="form-control">
+                            <div class="valid-feedback">Title looks good</div>
+                             <div class="invalid-feedback">Title doesn't looks good</div>
+                    </div>
+                    <br><br>
+                    <div>
+                        <label for="description" class="form-label">description</label>
+                        <textarea name="description" placeholder="enter the description" type="string"
+                            class="form-control" required></textarea>
+                             <div class="valid-feedback">description looks good</div>
+                              <div class="invalid-feedback">description doesn't looks good</div>
+                    </div>
+                    <br><br>
+                    <div>
+                        <label for="image[url]" class="form-label">image</label>
+                        <input name="image[url]" placeholder="enter the URL" type="text" 
+                            class="form-control">
+                            <div class="valid-feedback">image looks good</div>
+                             <div class="invalid-feedback">image doesn't looks good</div>
+                    </div>
+                    <br><br>
+                    
+                    <div class="row">
+                        <div class="col-4">
+                            <div>
+                                <label for="price" class="form-label">price</label>
+                                <input name="price" placeholder="enter the price" type="number" class="form-control" required>
+                                  <div class="valid-feedback">price looks good</div>
+                                    <div class="invalid-feedback">price doesn't looks good</div>
+
+                            </div>
+                           
+                        </div>
+
+                        <br><br>
+                        <div class="col-8">
+                            <div>
+                                <label for="location" class="form-label">location</label>
+                                <input name="location" placeholder="enter the location" type="text"
+                                    class="form-control" required>
+                                      <div class="valid-feedback">location looks good</div>
+                                        <div class="invalid-feedback">location doesn't looks good</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <br><br>
+                    <div>
+                        <label for="country" class="form-label">country</label>
+                        <input name="country" placeholder="enter the country" type="text" class="form-control" required>
+                          <div class="valid-feedback">country looks good</div>
+                            <div class="invalid-feedback">country doesn't looks good</div>
+                    </div>
+
+
+
+
+
+
+
+                    <br><br>
+
+
+                    <button class="btn btn-dark " id="add-btn">Add</button>
+
+
+
+                </form>
+
+         
+        </div>
+    </div>
