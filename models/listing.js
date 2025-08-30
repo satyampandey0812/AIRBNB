@@ -3,35 +3,43 @@
 
 
 const mongoose = require("mongoose");
-const reviews = require("./reviews");
+const Review = require("./reviews.js");
+const Schema = mongoose.Schema;
+// const { listingSchema } = require("../schema_joi.js");
 
-const listingSchema = new mongoose.Schema({
+const listingSchema = new Schema({
     title: {
         type: String,
         required: true,
     },
     description: String,
     image: {
+        url:String,
         filename: String,
-        url: {
-            type: String,
-            default: "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
-            set: (v) =>
-                v === "" 
-                    ? "https://images.unsplash.com/photo-1506744038136-46273834b3fb" 
-                    : v,
-        },
+        
     },
     price: Number,
     location: String,
     country: String,
     reviews:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Review"
+        type: Schema.Types.ObjectId,
+        ref: "Review",
 
     },],
+    owner:{
+        type:  Schema.Types.ObjectId,
+        ref: "User",
+    },
 });
 
-const Listing = new mongoose.model("listing", listingSchema);
+
+// this is delete listing handling mongoose middleware which deletes all the related reviews when a listing is deleted....
+listingSchema.post("findOneAndDelete", async(listing)=>{
+    if(listing){
+        await Review.deleteMany({_id:{$in:listing.reviews}});
+    }
+});
+
+const Listing = mongoose.model("listing", listingSchema);
 module.exports = Listing;
 
