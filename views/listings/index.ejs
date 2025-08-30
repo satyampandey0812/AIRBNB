@@ -3,26 +3,37 @@
     #filters {
       display: flex;
       flex-wrap: wrap;
+      align-items: center;
 
     }
-    .filter{
+
+    .filter {
       text-align: center;
       margin-right: 2rem;
       margin-top: 1rem;
-      opacity:0.7;
+      opacity: 0.7;
     }
-    .filter:hover{
-     opacity:1;
-     cursor:pointer;
+
+    .filter:hover {
+      opacity: 1;
+      cursor: pointer;
     }
-    .filter p{
+
+    .filter p {
       font-size: 0.8rem;
     }
-    .tax-toggle{
+
+    .tax-toggle {
       border: 1px solid black;
       border-radius: 1rem;
-      height: 3.5rem;
+      height: 3.20rem;
       padding: 0.85rem;
+      margin-left: 3rem;
+      display:flex;
+      align-items:center;
+    }
+    .tax-info{
+      display:none;
     }
   </style>
 
@@ -36,31 +47,31 @@
     </div>
     <div class="filter">
       <div>
-       <i class="fa-solid fa-bed"></i>
+        <i class="fa-solid fa-bed"></i>
       </div>
       <p>Rooms</p>
     </div>
     <div class="filter">
       <div>
-      <i class="fa-solid fa-mountain-city"></i>
+        <i class="fa-solid fa-mountain-city"></i>
       </div>
       <p>Iconic Cities</p>
     </div>
     <div class="filter">
       <div>
-      <i class="fa-solid fa-mountain"></i>
+        <i class="fa-solid fa-mountain"></i>
       </div>
       <p>Mountains</p>
     </div>
     <div class="filter">
       <div>
-     <i class="fa-solid fa-chess-rook"></i>
+        <i class="fa-solid fa-chess-rook"></i>
       </div>
       <p>Castles</p>
     </div>
     <div class="filter">
       <div>
-     <i class="fa-solid fa-person-swimming"></i>
+        <i class="fa-solid fa-person-swimming"></i>
       </div>
       <p>Amazing pools</p>
     </div>
@@ -72,33 +83,28 @@
     </div>
     <div class="filter">
       <div>
-    <i class="fa-solid fa-cow"></i>
+        <i class="fa-solid fa-cow"></i>
       </div>
       <p>farms</p>
     </div>
     <div class="filter">
       <div>
-    <i class="fa-solid fa-snowflake"></i>
+        <i class="fa-solid fa-snowflake"></i>
       </div>
       <p>Artic pools</p>
     </div>
     <div class="filter">
       <div>
-       <i class="fa-solid fa-umbrella-beach"></i>
+        <i class="fa-solid fa-umbrella-beach"></i>
       </div>
       <p>sea shore</p>
     </div>
-   <div class="tax-toggle form-switch">
-  <input 
-    class="form-check-input" 
-    type="checkbox" 
-    role="switch" 
-    id="flexSwitchCheckDefault" 
-  />
-  <label class="form-check-label" for="flexSwitchCheckDefault">
-    Default switch checkbox
-  </label>
-</div>
+    <div class="tax-toggle form-switch ">
+      <input class="form-check-reverse" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+      <label class="form-check-label" for="flexSwitchCheckDefault">
+        Display total after taxes
+      </label>
+    </div>
 
   </div>
   <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 mt-3">
@@ -112,9 +118,26 @@
               </b></h5>
             <p class="card-text">
               &#8377;<%= (listing.price || 0).toLocaleString("en-IN") %>/per night
+              <i class="tax-info">&nbsp;&nbsp;+18 GST</i>
             </p>
           </div>
         </a>
       </div>
       <% } %>
   </div>
+
+  <script>
+    let taxSwitch= document.getElementById("flexSwitchCheckDefault");
+    taxSwitch.addEventListener("click",()=>{
+     let taxInfo = document.getElementsByClassName("tax-info");
+    for(info of taxInfo){
+      if(info.style.display != "inline"){
+        info.style.display="inline";
+      }else{
+        info.style.display="none";
+
+      }
+      
+    }
+    });
+  </script>

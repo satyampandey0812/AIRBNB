@@ -12,6 +12,7 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
+const MongoStore= require("connect-mongo");
 const flash = require("connect-flash"); 
 const passport= require("passport");
 const LocalStrategy = require("passport-local");
@@ -27,6 +28,8 @@ const userRouter= require("./routes/user.js")
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 
+const dbUrl= process.env.ATLASDB_URL || "mongodb://127.0.0.1:27017/wanderlust"; 
+
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -36,13 +39,27 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
+const store= MongoStore.create(
+  {
+    mongoUrl:dbUrl,
+    crypto:{
+      secret:process.env.SECRET
+    },
+    touchAfter:24*3600,
+  }
+)
+
 
 // Home route
 // app.get("/", (req, res) => {
 //   res.send("root is working");
 // });
+store.on("error",(err)=>{
+  console.log("ERROR in MONGO SESSION STORE", err);
+});
 
 const sessionOptions = {
+  store,
   secret:process.env.SECRET,
   resave: false,
   saveUninitialized: true,
@@ -52,6 +69,7 @@ const sessionOptions = {
     httpOnly: true,
   }
 }
+
 
 
 
@@ -88,7 +106,7 @@ main().then(() => { console.log("connected to database"); })
   .catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/wanderLust');
+  await mongoose.connect(dbUrl);
 
 }
 
@@ -111,6 +129,14 @@ app.use((err, req, res, next) => {
 });
 
 
-app.listen(8080, () => {
-  console.log("server is listening");
+// app.listen(8080, () => {
+//   console.log("server is listening");
+// });
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => console.log(`Server running on ${PORT}`));
+mongoose.connection.on("connected", () => {
+  console.log("✅ MongoDB connected");
+});
+mongoose.connection.on("error", (err) => {
+  console.error("❌ MongoDB connection error:", err);
 });
